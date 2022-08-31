@@ -1,0 +1,15 @@
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .nav-link.active {
+  color: rgb(54,100,244);
+}
+
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 14px;
+  }
+}
+

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 mt-5">
+    <!-- Start: canito detalle producto -->
+    <div class="container">
+        <h1 class="text-center">{{product.Name}}</h1>
+        <div class="row" style="width: 100%;">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-12"><img class="img-thumbnail img-fluid center-block" src="{{ product.image.url }}"></div>
+                </div>
+                <div class="row">
+                    {% for pi in product.productimage_set.all %}
+                    <div class="col-6 col-sm-6 col-md-6">
+                        <a href="{{pi.image.url}}" target="_blank">
+                        <img class="img-thumbnail img-fluid center-block" src="{{pi.image.url}}">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-5 justify-content-center justify-content-xl-center">
+                <div class="row" style="width: 100%;font-size: 14px;">
+                    <div class="col-md-12 d-xl-flex justify-content-xl-start" style="width: 100%;font-size: 14px;">
+                        <h4 style="width: 40%;font-size: 18px;"><strong>Marque:</strong></h4>
+                        <h4 style="width: 60%;font-size: 15px;">{{ product.marque }}</h4>
+                    </div>
+                    {% if product.space %}
+                    <div class="col-md-12 d-xl-flex justify-content-xl-start" style="width: 100%;">
+                        <h4 style="width: 40%;font-size: 18px;"><strong>Espace :</strong></h4>
+                        <h4 style="width: 60%;font-size: 15px;">{{ product.space }}</h4>
+                    </div>
+                    {% endif %}
+                    {% if product.scree %}
+                    <div class="col-md-12 d-xl-flex justify-content-xl-start" style="width: 100%;">
+                        <h4 style="width: 40%;font-size: 18px;"><strong>Ecran :</strong></h4>
+                        <h4 style="width: 60%;font-size: 15px;">{{ product.screen }}</h4>
+                    </div>
+                    {% endif %}
+                    {% if product.cpu %}
+                    <div class="col-md-12 d-xl-flex justify-content-xl-start" style="width: 100%;">
+                        <h4 style="width: 40%;font-size: 18px;"><strong>Processeur:</strong></h4>
+                        <h4 style="width: 60%;font-size: 15px;">{{ product.cpu }}</h4>
+                    </div>
+                    {% endif %}
+                    {% if product.ram%}
+                    <div class="col-md-12 d-xl-flex justify-content-xl-start" style="width: 100%;">
+                        <h4 style="width: 40%;font-size: 18px;"><strong>Ram:</strong></h4>
+                        <h4 style="width: 60%;font-size: 15px;">{{ product.ram }}</h4>
+                    </div>
+                    {% endif %}
+                    {% if product.gpu %}
+                    <div class="col-md-12 d-xl-flex justify-content-xl-start" style="width: 100%;">
+                        <h4 style="width: 40%;font-size: 18px;"><strong>Graphique:</strong></h4>
+                        <h4 style="width: 60%;font-size: 15px;">{{ product.gpu }}</h4>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col d-xl-flex justify-content-xl-center" style="margin-top:25px; margin-bottom: 25px; font-weight:bold">{{ product.price }} .FCFA</div>
+                </div>
+                <div class="row">
+                    <div class="col d-xl-flex justify-content-xl-center"><a href="{% url 'cart:addtocart' product.id %}"><button class="btn btn-danger d-flex center-block" type="button" style="background: rgb(55,99,244);"><i class="fa fa-cart-plus"></i> Ajouter au Panier</button></a></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End: canito detalle producto -->
+</section><!-- Start: Footer Multi Column -->
+
+{% endblock %}
+
+<div class="container">
+    <h3>{{product.Name}}</h3><hr>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{product.image.url}}" alt="" class="img-fluid">
+            <div class="row">
+                {% for pi in product.productimage_set.all %}
+                <div class="col-md-4 p-3">
+                    <a href="{{pi.image.url}}" target="_blank">
+                        <img src="{{pi.image.url}}" class="img-fluid" style="height: 100px; object-fit: contain;" alt="">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4>{{product.title}}</h4>
+            <h5>Category: {{product.category}}</h5>
+            <h5>Price: <strike>{{product.price}} .FCFA</strike></h5>
+            <a href="{% url 'cart:addtocart' product.id %}" class="btn btn-info">Add To Cart</a>
+            <hr>
+            <hr>
+            <p>{{product.description}}</p>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    <header class="bg-primary-gradient pt-5">
+        <!-- Start: Hero Clean Reverse -->
+        <div class="container pt-4 pt-xl-5">
+            <div class="row pt-5">
+                <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
+                    <div class="text-center">
+                        <p class="fw-bold text-success mb-2" style="font-family: 'Alex Brush', serif;">Prix Etudiant</p>
+                        <h1 class="fw-bold" id="desc">Du Matériel informatique <span style="color: rgb(54, 100, 244);">à prix d' Etudiant.</span></h1>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-10 mx-auto">
+                    <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" data-aos="fade-right" data-aos-duration="700" src="{% static 'assets/img/products/martin-katler-7wCxlBfGMdk-unsplash.jpg' %}"></div>
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" data-aos="fade-left" data-aos-duration="700" data-aos-delay="150" src="{% static 'assets/img/products/frank-r-SaiJ_n1TvCU-unsplash.jpg' %}" width="416" height="624"></div>
+                        <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" data-aos="fade-up" data-aos-duration="700" src="{% static 'assets/img/products/dell-YNliXm_hMn8-unsplash.jpg' %}"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End: Hero Clean Reverse -->
+    </header>
+    <section class="py-5">
+        <div class="container text-center py-5" id="marque">
+            <p class="fw-bold text-success mb-2" style="color: rgb(55,99,244);">Les Marques</p>
+            {% for marque in marques %}
+            <a href="{% url 'products:marques' marque.id %}"> <img data-aos="zoom-in" data-aos-duration="600" class="m-3" src="{{ marque.image.url }}" style="width: 40px;height: 40px;"></a>
+            {% endfor %}
+        </div>
+        <div data-reflow-type="category-list" data-reflow-layout="horizontal-bar" data-reflow-category-link="shopping-cart.html" style="padding-right: 30px;padding-left: 30px;"></div>
+    </section>
+    <section>
+        <!-- Start: Features Cards -->
+        <div class="container bg-primary-gradient py-5">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold">Ce que nous vendons</h3>
+                </div>
+            </div>
+            <div class="py-5 p-lg-5">
+                <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                    {% for category in categories %}
+                    <div class="col mb-5">
+                        <div class="card shadow-sm">
+                            <div class="card-body px-4 py-5 px-md-5">
+                                <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><i class="icon ion-usb"></i></div>
+                                <h5 class="fw-bold card-title">{{ category.name }}</h5>
+                                <p style="text-align: center"><img class="m-3" src="{{ category.image.url }}" style="width: 100px; height: 100px;"></a></p>
+                                <a href= "{% url 'products:categories' category.id %}"><button class="btn btn-primary shadow" type="button">Voir</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div><!-- End: Features Cards -->
+    </section><!-- Start: Footer Multi Column -->
+    {% endblock %}

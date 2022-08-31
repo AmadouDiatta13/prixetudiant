@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container py-5">
+        <div class="row mx-auto" style="/*max-width: 700px;*/">
+            <div class="col">
+                <div data-reflow-type="shopping-cart" style="padding: 10px;">
+                    <div class="reflow-shopping-cart" style="display: block;">
+                        {% if cart %}
+                        <div class="ref-cart">
+                            <div class="ref-heading">Panier</div>
+                            <div class="ref-th">
+                                <div class="ref-product-col">Produit</div>
+                                <div class="ref-price-col">Prix</div>
+                                <div class="ref-quantity-col">Quantite</div>
+                                <div class="ref-total-col">Total</div>
+                            </div>
+                            <div class="ref-cart-table">
+                                {% for cp in cart.cartproduct_set.all %}
+                                <div class="ref-product">
+                                    <div class="ref-product-col">
+                                        <div class="ref-product-wrapper"><img class="ref-product-photo" src="{{cp.product.image.url}}" alt="Produit" />
+                                            <div class="ref-product-data">
+                                                <div class="ref-product-info">
+                                                    <div class="ref-product-name">{{cp.product.name}}</div>
+                                                    <div class="ref-product-category">Categorie</div>
+                                                </div>
+                                                <div class="ref-product-price">{{cp.rate}} .F</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="ref-product-controls">
+                                            <div class="ref-product-quantity">
+                                                <div class="ref-quantity-container" data-reflow-max-qty="999" data-reflow-quantity="{{cp.quantity}}">
+                                                    <div class="ref-quantity-widget">
+                                                        <div class="ref-decrease"><span><a href="{% url 'cart:managecart' cp.id %}?action=dcr"></a></span></div>
+                                                        <input type="text" value="{{cp.quantity}}" />
+                                                        <div class="ref-increase"><span><a href="{% url 'cart:managecart' cp.id %}?action=inc"></a></span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="ref-product-qty-message"></div>
+                                                <div class="ref-product-remove"><a href="{% url 'cart:managecart' cp.id %}?action=rmv">Remove</a></div>
+                                            </div>
+                                            <div class="ref-product-total">
+                                                <div class="ref-product-total-sum">{{cp.subtotal}} .F</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ref-price-col">
+                                        <div class="ref-product-price">{{cp.rate}} .F</div>
+                                    </div>
+                                    <div class="ref-quantity-col">
+                                        <div class="ref-product-quantity">
+                                            <div class="ref-quantity-container" data-reflow-max-qty="999" data-reflow-quantity="{{cp.quantity}}">
+                                                <div class="ref-quantity-widget">
+                                                    <div class="ref-decrease"><a href="{% url 'cart:managecart' cp.id %}?action=dcr"> - </a></div>
+                                                    <input type="text" value="{{cp.quantity}}" />
+                                                    <div class="ref-increase"><a href="{% url 'cart:managecart' cp.id %}?action=inc"> + </a></div>
+                                                </div>
+                                            </div>
+                                            <div class="ref-product-qty-message"></div>
+                                            <div class="ref-product-remove" ><a href="{% url 'cart:managecart' cp.id %}?action=rmv">Remove</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="ref-total-col">
+                                        <div class="ref-product-total">
+                                            <div class="ref-product-total-sum">{{cp.subtotal}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="ref-footer">
+                                <div class="ref-links"></div>
+                                <div class="ref-totals">
+                                    <div class="ref-subtotal">{{cart.total}}.F</div>
+                                    {% if cart.cartproduct_set.all %}
+                                    <div class="ref-shipping-taxes"><a href="{% url 'cart:emptycart' %}">Vider le Panier</a></div>
+                                    <div class="ref-button ref-checkout-button"><a href="{% url 'cart:checkout' %}">Passer au commande</a></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                            <h3>Votre Panier est Vide</h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+    {% block content  %}
+    <section class="py-5 mt-5" style="width: 100%;">
+        <!-- Start: s-product-catalog -->
+        <div class="container">
+            <div class="row" style="width: 100%;margin-right: 10px;margin-left: 10px;margin-bottom: 10px;margin-top: 10px;">
+            {% if products %}
+                {% for product in products %}
+                <div class="col-md-4">
+                    <div class="product-inner">
+                        <div data-lightbox="photos" class="product-wrap">
+                            <img src="{{ product.image.url }}">
+                            <div class="actions">
+                                <a href="{% url 'cart:addtocart' product.id %}" class="add-to-cart"></a>
+                                <a href="{% url 'products:productdetail' product.id %}" class="quickview"></a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title"><a href="">{{ poduct.name }}</a></h3>
+                            <span class="price">{{ product.price }} .FCFA</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                <h3 style="text-align:center; font-weight: bold;">Vide</h3>
+            {% endif %}
+        </div><!-- End: s-product-catalog -->
+    </section><!-- Start: Footer Multi Column -->
+{% endblock %}

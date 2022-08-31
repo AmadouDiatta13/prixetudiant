@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container py-5">
+        <div class="row mx-auto" style="/*max-width: 700px;*/">
+            <div class="col">
+                <div data-reflow-type="shopping-cart" style="padding: 10px;">
+                    <div class="reflow-shopping-cart" style="display: block;">
+                        <div class="ref-checkout" style="display: flex;">
+                            <div class="ref-checkout-content">
+                                <form action="" method="POST" class="ref-details" style="display: block;">
+                                    {% csrf_token %}
+                                    <div class="ref-back"><a href="{% url 'cart:mycart' %}">← Retour au Panier</a></div>
+                                    <div class="ref-heading">Qui Commande ?</div>
+                                    <label><span>Nom</span>
+                                        <input id="ref-field-ordered_by" class="ref-form-control" type="text" name="ordered_by" value required data-state-src="ordered_by" />
+                                        <div class="ref-validation-error"></div>
+                                    </label>
+                                    <label><span>Email(optionnel)</span>
+                                        <input id="ref-field-email" class="ref-form-control" type="email" name="email" value required data-state-src="email" />
+                                        <div class="ref-validation-error"></div>
+                                    </label><label><span>Telephone</span>
+                                        <input id="ref-field-phone" class="ref-form-control" type="tel" name="mobile" value pattern="[0-9\+\- ]{5,30}" placeholder="791234567" required data-state-src="phone" />
+                                        <div class="ref-validation-error"></div>
+                                    </label>
+                                    <label><span>Adresse</span>
+                                        <input class="ref-form-control ref-field-details-country" type= "text" placeholder="Hlm, Dakar" name="shipping_address" required>
+                                    </label>
+                                    <button class="btn btn-info">Commander</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
